@@ -1,0 +1,110 @@
+﻿<Window x:Class="Steganografia.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Steganografia"
+        mc:Ignorable="d"
+        Title="Steganografia" Height="920" Width="800" Background="Turquoise">
+    <TabControl  Background="Turquoise" SelectionChanged="TabControl_SelectionChanged">
+        <TabItem Header="Steganografia" Background="Green" HorizontalAlignment="Left" Width="69">
+            <Grid>
+
+
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="189*"/>
+                    <ColumnDefinition Width="605*"/>
+                </Grid.ColumnDefinitions>
+                <Border Padding="10" Grid.ColumnSpan="2" Margin="0,0,-0.4,0.4">
+                    <StackPanel>
+
+                        <TextBlock Text="Steganografia" HorizontalAlignment="Center" FontWeight="Bold" FontSize="20"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0" Margin=" 20 20 20 20">
+                                <TextBlock Margin="0 0 0 5" Text="Załaduj zdjęcie " HorizontalAlignment="Center"/>
+                                <Button x:Name="ImageButton" Width="160" Height="160" Click="ImageButton_Click">
+                                    <StackPanel>
+                                        <Image x:Name="ImageInButton"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button x:Name="Save" Width="100" Height="20" Content="Zapisz" Foreground="White" FontWeight="Bold" Background="#FF7747DE" Margin="0 5 0 5" Click="Save_Click"/>
+                                <TextBlock HorizontalAlignment="Center" x:Name="charsToEncryptInImageTextBlock" Margin="0 5 0 0" Text="Maksymalna ilość znaków: "/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="1" Margin=" 20 20 20 20">
+                                <TextBlock Margin="0 0 0 5" Text="Wiadomość:"/>
+                                <TextBox TextChanged="InputTextBox_TextChanged"  x:Name="InputTextBox"  Height="140" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
+                                <Button x:Name="loadTextButton" Click="loadTextButton_Click" Content="Załaduj tekst"/>
+                                <TextBlock x:Name="charsToEncryptInMessageTextBlock" Margin="0 5 0 0" Text="Ilość znaków: "/>
+                                <TextBlock Text="Wynik:" Margin="0 0 0 10" FontWeight="Bold"/>
+                                <TextBox x:Name="OutputTextBox" IsReadOnly="True" Height="100" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
+                            </StackPanel>
+
+                        </Grid>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0" Margin=" 20 20 20 20">
+                                <Button IsEnabled="False" x:Name="EncryptButton" Content="Zakoduj" Click="EncryptButton_Click"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="1" Margin=" 20 20 20 20">
+                                <Button IsEnabled="False" x:Name="DecryptButton" Content="Odkoduj" Click="DecryptButton_Click"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="2" Margin=" 20 20 20 20">
+                                <Button x:Name="SaveOutputButton" Content="Zapisz wynik do pliku" Click="SaveOutputButton_Click"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="3" Margin=" 20 20 20 20">
+                                <Button x:Name="ResetButton" Content="Reset"  Click="ResetButton_Click"/>
+                            </StackPanel>
+
+                        </Grid>
+
+
+
+
+                    </StackPanel>
+                </Border>
+
+            </Grid>
+        </TabItem>
+        <TabItem Header="Help" Background="#FFB6EED7" HorizontalAlignment="Left" Width="69">
+            <StackPanel>
+            <Grid>
+               
+                <Label Name="label" Content="Program obsługuje pliki w formacie PNG." Width="500" FontSize="15" Margin="10,0,278,830.6" Grid.ColumnSpan="2" />
+                <Label Name="label2" Content="Program automatycznie na końcu tekstu dodaje 2 znaki '#'. " Width="500" FontSize="15" Margin="10,31,278,799.6" Grid.ColumnSpan="2" />
+                <Label Name="label3" Content="Przy odszyfrowaniu, program gdy odnajdzie takie znaki, zakończy odszyfrowywanie. " FontSize="15" Margin="10,62,212,768.6" Grid.ColumnSpan="2" />
+                <Label Name="label4" Content="Używana jest metoda najmniej znaczącego bitu LSB" FontSize="15" Margin="10,93,212,737.6" Grid.ColumnSpan="2" />
+                <Label Name="label5" Content="Polega na podmianie najmniej znaczącego" FontSize="15" Margin="10,124,212,706.6" Grid.ColumnSpan="2" />
+                <Label Name="label6" Content=" bitu zapisanej cyfrowo próbki sygnału bitem informacji ukrywanej. " FontSize="15" Margin="294,124,-90,706.8" />
+                <Label Name="label7" Content=" Każda składowa koloru obrazu to pewna wartość rzeczywista zapisana na określonej liczbie bitów. " FontSize="15" Margin="8,158,113,672.8" />
+                <Label Name="label8" Content=" Jeden pixel na obrazie jest zapisany w postaci 4 8-smiobitowych składowych: czerwona, zielona, niebieska i kanał alpha (przezroczystość)" FontSize="15" Margin="10,191,250,639.8" />
+                <Label Name="label9" Content="czerwona, zielona, niebieska i kanał alpha (przezroczystość) " FontSize="15" Margin="15,218,250,612.6" Grid.ColumnSpan="2" />
+                    <Label Name="label11" Content=" - kanał ten w ARGB jest modyfikacją typowego LSB" FontSize="15" Margin="228,248,-203,582.8" />
+                    <Label Name="label10" Content="Grafika pochodzi ze strony http://ekryptografia.pl i nie zawiera kanału alfa, ale ilustruje przykładowe szyfrowanie:" FontSize="15" Margin="15,311,10,519.6" Grid.ColumnSpan="2" />
+
+                    <Image Source="C:/Users/Cebula/Desktop/zapisywanie.png" Margin="90.6,10,129,-10.4" Grid.Column="1"  />
+                    <Label Name="label12" Content="made by Michał Maciaszek" FontSize="15" Margin="25,536,0,294.8" />
+                </Grid>
+            </StackPanel>
+        </TabItem>
+
+
+
+    </TabControl>
+</Window>
